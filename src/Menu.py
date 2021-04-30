@@ -112,11 +112,11 @@ class Menu:
     def __click_speed_menu(self, x, y):
             if -200 < x < 200 and 150 < y < 220:
                 self.pen.clear()
-                common.delay = 0.08
+                common.delay = 0.07
                 change_vars(common.name1, common.name2, str(common.delay))
                 self.get_back()
                 return
-            if -200 < x < 200 and 50 < y < 120:
+            if -200 < x < 200 and 50 < y < 120
                 self.pen.clear()
                 common.delay = 0.05
                 change_vars(common.name1, common.name2, str(common.delay))
