@@ -30,6 +30,8 @@ class Player(turtle.Turtle):
         new_segment.color(self.color_var)
         new_segment.shapesize(0.5)
         new_segment.penup()
+        new_segment.goto(self.xcor(), self.ycor())
+        self.__move()
         self.segments.append(new_segment)
         return
 
@@ -70,17 +72,6 @@ class Player(turtle.Turtle):
         try:
             if self.direction != "stop":
                 self.build()
-
-            for i in range(len(self.segments) - 1, 0, -1):
-                x = self.segments[i - 1].xcor()
-                y = self.segments[i - 1].ycor()
-                self.segments[i].goto(x, y)
-
-            if len(self.segments) > 0:
-                x = self.xcor()
-                y = self.ycor()
-                self.segments[0].goto(x, y)
-            self.__move()
         except turtle.Terminator:
             sys.exit()
 
@@ -95,6 +86,7 @@ class Player(turtle.Turtle):
         self.goto(self.initial_x, self.initial_y)
         for segment in self.segments:
             segment.goto(1000, 1000)
+            del segment
         self.segments.clear()
         self.direction = "stop"
 
