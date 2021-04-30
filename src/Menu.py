@@ -116,7 +116,7 @@ class Menu:
                 change_vars(common.name1, common.name2, str(common.delay))
                 self.get_back()
                 return
-            if -200 < x < 200 and 50 < y < 120
+            if -200 < x < 200 and 50 < y < 120:
                 self.pen.clear()
                 common.delay = 0.05
                 change_vars(common.name1, common.name2, str(common.delay))
