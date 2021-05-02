@@ -172,8 +172,8 @@ class Game:
 
             self.player1.move_all()
             self.player2.move_all()
-            if len(self.player1.segments) % 12 == 0 and self.delay > 0.0013:
-                self.delay -= 0.0012
+            if len(self.player1.segments) % 10 == 0 and self.delay > 0.0009:
+                self.delay -= 0.0008
             for segment in self.player1.segments:
                 if segment.distance(self.player2) < 10:
                     first_wins_var = True
