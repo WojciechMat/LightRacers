@@ -1,5 +1,6 @@
 import sys
 import turtle
+import common
 
 
 class Player(turtle.Turtle):
@@ -21,9 +22,9 @@ class Player(turtle.Turtle):
         self.goto(0, y)
         self.score = 0
         self.name = name
+        self.clicked = False  # thanks to this variable player can not 'kill himself' by suddenly turning around
 
     def build(self):
-
         new_segment = turtle.Turtle()
         new_segment.speed(0)
         new_segment.shape("square")
@@ -48,22 +49,26 @@ class Player(turtle.Turtle):
         return
 
     def go_up(self):
-        if self.direction != "down":
+        if self.direction != "down" and not self.clicked:
+            self.clicked = True
             self.direction = "up"
         return
 
     def go_right(self):
-        if self.direction != "left":
+        if self.direction != "left" and not self.clicked:
+            self.clicked = True
             self.direction = "right"
         return
 
     def go_left(self):
-        if self.direction != "right":
+        if self.direction != "right" and not self.clicked:
+            self.clicked = True
             self.direction = "left"
         return
 
     def go_down(self):
-        if self.direction != "up":
+        if self.direction != "up" and not self.clicked:
+            self.clicked = True
             self.direction = "down"
         return
 
@@ -85,8 +90,10 @@ class Player(turtle.Turtle):
 
         self.goto(self.initial_x, self.initial_y)
         for segment in self.segments:
-            segment.goto(1000, 1000)
-            del segment
+            common.window.turtles().remove(segment)
+            segment.goto(0, 0)
+            segment.reset()
+            segment.showturtle()
         self.segments.clear()
         self.direction = "stop"
 

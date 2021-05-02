@@ -17,9 +17,10 @@ class Game:
         var_file = open("variables", 'r')
         variables = var_file.read().splitlines()
         var_file.close()
-        self.player1 = Player("stop", -1 * self.win_size / 2 + 50, "red", self.win_size, variables[0])
-        self.player2 = Player("stop", self.win_size / 2 - 50, "blue", self.win_size, variables[1])
-        self.delay = variables[2]
+        self.player1 = Player("stop", -1 * self.win_size / 2 + 70, "red", self.win_size, variables[0])
+        self.player2 = Player("stop", self.win_size / 2 - 70, "blue", self.win_size, variables[1])
+        self.init_delay = float(variables[2])
+        self.delay = self.init_delay
         self.player1.hideturtle()
         self.player2.hideturtle()
         self.started = False
@@ -119,10 +120,14 @@ class Game:
     def begin(self):
         if self.aborted:
             return
+        self.delay = self.init_delay
+        self.pen.penup()
+        self.pen.hideturtle()
         self.player1.showturtle()
         self.player2.showturtle()
         common.window.update()
         common.window.bgcolor("black")
+
         self.pen.clear()
         self.draw_scores()
         self.started = False
@@ -154,7 +159,10 @@ class Game:
 
         # main game loop
         while self.started is True and not self.aborted:
+            delay_changer = 0.0
             common.window.update()
+            self.player1.clicked = False
+            self.player2.clicked = False
             first_wins_var = False
             second_wins_var = False
             if self.player1.isOut():
@@ -164,7 +172,8 @@ class Game:
 
             self.player1.move_all()
             self.player2.move_all()
-
+            if len(self.player1.segments) % 12 == 0 and self.delay > 0.0013:
+                self.delay -= 0.0012
             for segment in self.player1.segments:
                 if segment.distance(self.player2) < 10:
                     first_wins_var = True
@@ -196,4 +205,5 @@ class Game:
                 self.player2.restart()
                 self.begin()
 
-            time.sleep(common.delay)
+            time.sleep(self.delay)
+

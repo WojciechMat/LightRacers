@@ -9,6 +9,7 @@ name2 = variables[1]
 delay = float(variables[2])
 win_size = 600
 
+
 # game window
 window = turtle.Screen()
 window.title("Light Racers")

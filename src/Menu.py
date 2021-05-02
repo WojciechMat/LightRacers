@@ -56,7 +56,7 @@ class Menu:
         self.pen.write("Exit", align="center", font=("Courier", 40, "normal"))
         self.__button(-220)
         self.pen.goto(-290, -290)
-        self.pen.write("v.1.0 by @WojciechMat", align="left", font=("Courier", 10, "normal"))
+        self.pen.write("v.1.1 by @WojciechMat", align="left", font=("Courier", 10, "normal"))
 
     def get_back(self):
         self.__show_options()
